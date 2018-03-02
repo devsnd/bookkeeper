@@ -93,7 +93,6 @@ class Account(models.Model, _AccountApi):
     #    and bookkeepers like to further sub-divide their accounts.  It would be nice to
     #    support this kind of organization.
 
-    accid = models.AutoField(primary_key=True)
     bookset = models.ForeignKey(BookSet, db_column='org', related_name='account_objects')
 
     def get_bookset(self):
@@ -245,7 +244,7 @@ class AccountEntry(models.Model):
 
     transaction = models.ForeignKey(Transaction, db_column='tid', related_name='entries')
 
-    account = models.ForeignKey(Account, db_column='accid', related_name='entries')
+    account = models.ForeignKey(Account, related_name='entries')
 
     amount = models.DecimalField(max_digits=8, decimal_places=2,
         help_text="""Debits: positive; Credits: negative.""")
