@@ -199,8 +199,6 @@ class Transaction(models.Model):
         2. All entries must be between accounts of the same BookSet.
     """
 
-    tid = models.AutoField(primary_key=True)
-
     t_stamp = models.DateTimeField(default=timezone.now)
     description = models.TextField()
 
@@ -208,7 +206,7 @@ class Transaction(models.Model):
         help_text="""The project for this transaction (if any).""", null=True)
 
     def __str__(self):
-        return "<Transaction {0}: {1}/>".format(self.tid, self.description)
+        return "<Transaction {0}: {1}/>".format(self.id, self.description)
 
 
 #questionable use of natural_keys?
@@ -245,10 +243,7 @@ class AccountEntry(models.Model):
         help_text="""Debits: positive; Credits: negative.""")
     description = models.TextField(
         help_text="""An optional "memo" field for this leg of the transaction.""")
-
     third_party = models.ForeignKey(ThirdParty, related_name='account_entries', null=True)
 
     def __str__(self):
-        base = "%d %s" % (self.amount, self.description)
-
-        return base
+        return "%s %s" % (self.amount, self.description)

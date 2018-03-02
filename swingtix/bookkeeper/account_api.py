@@ -208,7 +208,7 @@ class AccountBase(object):
             qs = qs.filter(transaction__t_stamp__gte=start)
         if end:
             qs = qs.filter(transaction__t_stamp__lt=end)
-        qs = qs.order_by("transaction__t_stamp", "transaction__tid")
+        qs = qs.order_by("transaction__t_stamp", "transaction__id")
 
         return qs
 
@@ -266,7 +266,7 @@ class AccountBase(object):
             flip *= -1
 
         qs = self._entries_range(start=start, end=end)
-        qs = qs.order_by("transaction__t_stamp", "transaction__tid")
+        qs = qs.order_by("transaction__t_stamp", "transaction__id")
 
         balance = Decimal("0.00")
         if start:
