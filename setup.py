@@ -20,7 +20,7 @@ setup(
         'future',
     ],
     tests_require=[
-        'django>=1.5,<1.7',
+        'django>=1.5,<2.0',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
