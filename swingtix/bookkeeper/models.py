@@ -199,7 +199,7 @@ class Transaction(models.Model):
         2. All entries must be between accounts of the same BookSet.
     """
 
-    t_stamp = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
     description = models.TextField()
 
     project = models.ForeignKey(Project, related_name="transactions",

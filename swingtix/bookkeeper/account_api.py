@@ -45,7 +45,7 @@ class LedgerEntry(object):
 
     @property
     def time(self):
-        return self._e.transaction.t_stamp
+        return self._e.transaction.created_at
 
     @property
     def description(self):
@@ -79,7 +79,7 @@ class LedgerEntry(object):
 
     @property
     def txid(self):
-        d = self._e.transaction.t_stamp.date()
+        d = self._e.transaction.created_at.date()
         return "{:04d}{:02d}{:02d}{:08d}".format(d.year, d.month, d.day, self._e.id)
 
     def other_entry(self):
@@ -169,7 +169,7 @@ class AccountBase(object):
         tx = self._new_transaction()
 
         if datetime:
-            tx.t_stamp = datetime
+            tx.created_at = datetime
         #else now()
 
         tx.description = description
@@ -187,7 +187,7 @@ class AccountBase(object):
 
         qs = self._entries()
         if date:
-            qs = qs.filter(transaction__t_stamp__lt=date)
+            qs = qs.filter(transaction__created_at__lt=date)
         r = qs.aggregate(b=Sum('amount'))
         b = r['b']
 
@@ -205,10 +205,10 @@ class AccountBase(object):
     def _entries_range(self, start=None, end=None):
         qs = self._entries()
         if start:
-            qs = qs.filter(transaction__t_stamp__gte=start)
+            qs = qs.filter(transaction__created_at__gte=start)
         if end:
-            qs = qs.filter(transaction__t_stamp__lt=end)
-        qs = qs.order_by("transaction__t_stamp", "transaction__id")
+            qs = qs.filter(transaction__created_at__lt=end)
+        qs = qs.order_by("transaction__created_at", "transaction__id")
 
         return qs
 
@@ -266,7 +266,7 @@ class AccountBase(object):
             flip *= -1
 
         qs = self._entries_range(start=start, end=end)
-        qs = qs.order_by("transaction__t_stamp", "transaction__id")
+        qs = qs.order_by("transaction__created_at", "transaction__id")
 
         balance = Decimal("0.00")
         if start:

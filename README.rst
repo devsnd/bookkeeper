@@ -39,7 +39,7 @@ Then you can use them::
 
     #Someone pays you can advance.  Yay!
     >>> bank.debit(120.00, revenue, "our first sale")
-    (<AccountEntry: 120 >, <AccountEntry: -120 >)
+    (<AccountEntry: 120.00 >, <AccountEntry: -120.00 >)
 
     #but now you have to do some work.  The local coffee shop has free wifi..
     >>> bank.credit(2.20, expense, "coffee")
