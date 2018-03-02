@@ -239,16 +239,10 @@ class AccountEntry(models.Model):
         return (self.transaction.pk,) + self.account.natural_key()
 
     objects = AccountEntryManager()
-
-    aeid = models.AutoField(primary_key=True)
-
-    transaction = models.ForeignKey(Transaction, db_column='tid', related_name='entries')
-
+    transaction = models.ForeignKey(Transaction, related_name='entries')
     account = models.ForeignKey(Account, related_name='entries')
-
     amount = models.DecimalField(max_digits=8, decimal_places=2,
         help_text="""Debits: positive; Credits: negative.""")
-
     description = models.TextField(
         help_text="""An optional "memo" field for this leg of the transaction.""")
 

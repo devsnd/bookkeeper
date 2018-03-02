@@ -80,7 +80,7 @@ class LedgerEntry(object):
     @property
     def txid(self):
         d = self._e.transaction.t_stamp.date()
-        return "{:04d}{:02d}{:02d}{:08d}".format(d.year, d.month, d.day, self._e.aeid)
+        return "{:04d}{:02d}{:02d}{:08d}".format(d.year, d.month, d.day, self._e.id)
 
     def other_entry(self):
         """ Returns the account of the other leg of this transaction.  Asserts if there's more than two legs. """
