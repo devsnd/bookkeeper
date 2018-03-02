@@ -246,4 +246,4 @@ class AccountEntry(models.Model):
     third_party = models.ForeignKey(ThirdParty, related_name='account_entries', null=True)
 
     def __str__(self):
-        return "%s %s" % (self.amount, self.description)
+        return "%.2f %s" % (self.amount, self.description)

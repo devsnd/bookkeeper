@@ -43,7 +43,7 @@ Then you can use them::
 
     #but now you have to do some work.  The local coffee shop has free wifi..
     >>> bank.credit(2.20, expense, "coffee")
-    (<AccountEntry: -2 >, <AccountEntry: 2 >)
+    (<AccountEntry: -2.20 >, <AccountEntry: 2.20 >)
 
     >>> bank.balance()
     Decimal('117.80')
